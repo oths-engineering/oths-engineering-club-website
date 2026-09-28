@@ -46,7 +46,7 @@ export default async function Home() {
         <Machine />
         <CircuitDivider flip />
         <NextMeeting meeting={upcoming?.[0]} />
-        <RecentMeetings meetings={(past ?? []).slice(0, 3)} />
+        <RecentMeetings meetings={(Array.isArray(past) ? past : []).slice(0, 3)} />
         <JoinCta />
       </div>
     </div>
