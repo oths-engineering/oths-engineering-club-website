@@ -1,0 +1,161 @@
+.hm {
+  --hm-bg: #06080d;
+  --hm-panel: #0a0e17;
+  --hm-line: rgb(120 150 220 / 0.07);
+  --hm-line-2: rgb(140 170 230 / 0.18);
+  --hm-blue: #184da3;
+  --hm-blue-hi: #4585f7;
+  --hm-orange: #d4593b;
+  --hm-orange-hi: #ff7f57;
+  --hm-text: #e8ecf5;
+  --hm-mute: #8994a9;
+  --scroll: 0;
+  --mx: -999px;
+  --my: -999px;
+  position: relative;
+  overflow-x: clip;
+  background: var(--hm-bg);
+  color: var(--hm-text);
+}
+.hm-o { color: var(--hm-orange-hi); }
+.hm-b { color: var(--hm-blue-hi); }
+.hm-mute { color: var(--hm-mute); }
+.hm-bd { border-color: var(--hm-line-2); }
+.hm-panel { background: var(--hm-panel); }
+.hm-glow { filter: drop-shadow(0 0 10px currentColor); }
+.hm-outline { color: transparent; -webkit-text-stroke: 2px var(--hm-blue-hi); }
+.hm-outline-o { color: transparent; -webkit-text-stroke: 2px var(--hm-orange-hi); }
+.hm-outline-soft { color: transparent; -webkit-text-stroke: 1.5px rgb(232 236 245 / 0.55); }
+
+/* ---------- backdrop ---------- */
+.hm-grid {
+  background-image:
+    linear-gradient(var(--hm-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--hm-line) 1px, transparent 1px);
+  background-size: 56px 56px;
+}
+.hm-grid-lit {
+  background-image:
+    linear-gradient(rgb(255 127 87 / 0.55) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(69 133 247 / 0.55) 1px, transparent 1px);
+  background-size: 56px 56px;
+  -webkit-mask-image: radial-gradient(280px circle at var(--mx) var(--my), #000, transparent);
+  mask-image: radial-gradient(280px circle at var(--mx) var(--my), #000, transparent);
+}
+.hm-spot { background: radial-gradient(520px circle at var(--mx) var(--my), rgb(69 133 247 / 0.1), transparent 70%); }
+.hm-vignette { background: radial-gradient(ellipse at center, transparent 45%, rgb(0 0 0 / 0.6)); }
+
+/* ---------- gear drivers ---------- */
+@keyframes hm-spin { to { transform: rotate(360deg); } }
+.hm-spin { animation: hm-spin 90s linear infinite; }
+.hm-scroll {
+  transform: rotate(calc(var(--scroll, 0) * var(--k, 0) * 0.12deg + var(--ph, 0) * 1deg));
+  will-change: transform;
+}
+.hm-sp { transform: rotate(calc(var(--sp, 0) * var(--k, 0) * 1080deg + var(--ph, 0) * 1deg)); }
+.hm-lit {
+  --dist: max(calc(var(--sp) - var(--c)), calc(var(--c) - var(--sp)));
+  opacity: clamp(0.2, calc(1.6 - var(--dist) * 4.8), 1);
+}
+
+/* ---------- reveals ---------- */
+.hm [data-reveal] {
+  opacity: 0;
+  transform: translateY(48px) scale(0.98);
+  filter: blur(10px);
+  transition:
+    opacity 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) var(--d, 0s),
+    transform 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) var(--d, 0s),
+    filter 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) var(--d, 0s);
+}
+.hm [data-reveal].is-in { opacity: 1; transform: none; filter: none; }
+
+.hm [data-draw] .hm-draw {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  transition: stroke-dashoffset 2.2s cubic-bezier(0.65, 0, 0.25, 1) var(--td, 0s);
+}
+.hm [data-draw].is-in .hm-draw { stroke-dashoffset: 0; }
+.hm [data-draw] .hm-pulse { opacity: 0; transition: opacity 0.5s 2.4s; filter: drop-shadow(0 0 6px currentColor); }
+.hm [data-draw].is-in .hm-pulse { opacity: 1; }
+.hm-node {
+  transform-box: fill-box;
+  transform-origin: center;
+  transform: scale(0);
+  transition: transform 0.5s cubic-bezier(0.3, 1.6, 0.5, 1) var(--td, 0s);
+}
+.hm [data-draw].is-in .hm-node { transform: scale(1); }
+.hm-scrubdraw { stroke-dasharray: 1; stroke-dashoffset: calc(1 - var(--sp, 0)); }
+
+/* ---------- hero ---------- */
+.hm-char { display: inline-block; transform: translateY(108%) rotate(8deg); animation: hm-char 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; animation-delay: calc(var(--d) + 0.2s); }
+@keyframes hm-char { to { transform: none; } }
+.hm-spool { animation: hm-spool 2.4s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+@keyframes hm-spool { from { transform: rotate(-70deg) scale(0.6); opacity: 0; } to { transform: none; opacity: 1; } }
+.hm-scan { position: absolute; left: 0; right: 0; top: -140px; height: 140px; pointer-events: none; background: linear-gradient(transparent, rgb(69 133 247 / 0.09), transparent); animation: hm-scan 8s linear infinite; }
+@keyframes hm-scan { to { transform: translateY(calc(100vh + 200px)); } }
+.hm-fade { animation: hm-fade 1.8s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+@keyframes hm-fade { from { opacity: 0; transform: translateX(var(--fx, 60px)) scale(0.8); } to { opacity: 1; transform: none; } }
+.hm-cue { position: relative; width: 1px; height: 52px; background: var(--hm-line-2); overflow: hidden; }
+.hm-cue::after { content: ""; position: absolute; left: -1px; width: 3px; height: 14px; background: var(--hm-orange-hi); animation: hm-cue 1.8s ease-in-out infinite; }
+@keyframes hm-cue { from { top: -14px; } to { top: 52px; } }
+.hm-blink { animation: hm-blink 1.2s steps(2) infinite; }
+@keyframes hm-blink { 50% { opacity: 0.15; } }
+
+/* ---------- marquee / tick ---------- */
+.hm-marquee { animation: hm-marquee 50s linear infinite; }
+@keyframes hm-marquee { to { transform: translateX(-50%); } }
+.hm-tick { display: inline-block; animation: hm-tick 0.35s cubic-bezier(0.2, 0.8, 0.2, 1); }
+@keyframes hm-tick { from { transform: translateY(-40%); opacity: 0; } to { transform: none; opacity: 1; } }
+
+/* ---------- buttons ---------- */
+.hm-btn {
+  position: relative; display: inline-flex; align-items: center; gap: 0.75rem;
+  padding: 1rem 1.6rem; font: 500 0.75rem/1 var(--f-mono), ui-monospace, monospace;
+  text-transform: uppercase; letter-spacing: 0.2em; color: var(--hm-text);
+  border: 1px solid var(--hm-orange-hi); overflow: hidden; isolation: isolate; transition: color 0.3s;
+}
+.hm-btn::before { content: ""; position: absolute; inset: 0; z-index: -1; background: var(--hm-orange); transform: translateX(-101%); transition: transform 0.45s cubic-bezier(0.7, 0, 0.2, 1); }
+.hm-btn:hover::before { transform: none; }
+.hm-btn-solid { background: var(--hm-orange); border-color: var(--hm-orange); }
+.hm-btn-solid::before { background: #fff; }
+.hm-btn-solid:hover { color: #06080d; }
+.hm-btn-blue { border-color: var(--hm-blue-hi); }
+.hm-btn-blue::before { background: var(--hm-blue); }
+.hm-ping { animation: hm-ping 2s ease-out infinite; }
+@keyframes hm-ping { 0% { box-shadow: 0 0 0 0 rgb(255 127 87 / 0.6); } 100% { box-shadow: 0 0 0 30px rgb(255 127 87 / 0); } }
+
+/* ---------- panels ---------- */
+.hm-corner { position: absolute; width: 18px; height: 18px; border: 2px solid var(--hm-orange-hi); }
+.hm-corner.tl { top: -1px; left: -1px; border-right: 0; border-bottom: 0; }
+.hm-corner.tr { top: -1px; right: -1px; border-left: 0; border-bottom: 0; }
+.hm-corner.bl { bottom: -1px; left: -1px; border-right: 0; border-top: 0; }
+.hm-corner.br { bottom: -1px; right: -1px; border-left: 0; border-top: 0; }
+.hm-bar { position: absolute; left: 0; bottom: 0; height: 3px; width: 100%; background: var(--hm-orange); transform: scaleX(0); transform-origin: left; transition: transform 1.4s cubic-bezier(0.7, 0, 0.2, 1) calc(var(--d, 0s) + 0.3s); }
+.is-in .hm-bar { transform: none; }
+.hm-card:hover .hm-spin { animation-duration: 5s !important; }
+.hm-card:hover .hm-card-gear { opacity: 0.9; }
+.hm-card-gear { opacity: 0.35; transition: opacity 0.4s; }
+
+.hm-tilt { position: relative; transform: perspective(900px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)); transition: transform 0.2s ease-out; }
+.hm-tilt::after { content: ""; position: absolute; inset: 0; pointer-events: none; z-index: 5; opacity: 0; transition: opacity 0.3s; background: radial-gradient(320px circle at var(--gx, 50%) var(--gy, 50%), rgb(255 255 255 / 0.1), transparent 60%); }
+.hm-tilt:hover::after { opacity: 1; }
+.hm-duo { background: var(--hm-blue); }
+.hm-duo img { filter: grayscale(1) contrast(1.15); mix-blend-mode: screen; transition: filter 0.5s, transform 0.6s; }
+.group:hover .hm-duo img { filter: none; mix-blend-mode: normal; transform: scale(1.06); }
+
+/* ---------- machine steps ---------- */
+.hm-step {
+  --dist: max(calc(var(--sp) - var(--c)), calc(var(--c) - var(--sp)));
+  opacity: clamp(0, calc(1.6 - var(--dist) * 4.8), 1);
+  transform: translateY(calc((var(--sp) - var(--c)) * -420px));
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hm *, .hm *::before, .hm *::after { animation: none !important; transition: none !important; }
+  .hm [data-reveal] { opacity: 1; transform: none; filter: none; }
+  .hm .hm-char { transform: none; }
+  .hm .hm-scroll { transform: none; }
+  .hm .hm-pulse { display: none; }
+}
