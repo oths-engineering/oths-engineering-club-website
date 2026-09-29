@@ -4,6 +4,8 @@ const W = 1440;
 const N = 6;
 const GAP = 16;
 const DROP = 64;
+const currentYear = new Date().getFullYear();
+
 
 function bus(a: number, b: number, base: number) {
   return Array.from({ length: N }, (_, i) => {
@@ -37,7 +39,7 @@ export default function CircuitDivider({ flip = false }: { flip?: boolean }) {
           ))}
           <circle cx="16" cy="22" r="3" fill="var(--hm-orange-hi)" />
           <text x="100" y="72" textAnchor="middle" fontSize="18" letterSpacing="3" fill="var(--hm-text)" className="font-mono">
-            TEDC-01
+            TEDC-{currentYear}
           </text>
         </g>
       </svg>
