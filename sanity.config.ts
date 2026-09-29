@@ -7,7 +7,7 @@ import { apiVersion, dataset, projectId } from "./sanity/env";
 import { schemaTypes } from "./sanity/schemaTypes";
 
 export default defineConfig({
-  name: "Tompkins Engineering Design",
+  name: "default",
   title: "Tompkins Engineering Design",
   basePath: "/studio",
   projectId,
