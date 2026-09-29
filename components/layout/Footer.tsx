@@ -21,7 +21,7 @@ export default function Footer() {
         <div className="grid gap-px border border-white/15 bg-white/15 md:grid-cols-4">
           <div className="space-y-3 bg-[#0a0e17] p-6">
             <p className={label}>Contact</p>
-            <a href={`mailto:${site.email}`} className={`${link} break-all underline underline-offset-4`}>
+            <a href={`mailto:${site.email}`} className={`${link} underline underline-offset-4`}>
               {site.email}
             </a>
           </div>
