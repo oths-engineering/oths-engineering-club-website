@@ -37,7 +37,6 @@ export const stages = [
   { k: "Present", d: "It works, or it teaches you why it didn't." },
 ];
 
-export const mission = [""];
 
 export const team: { name: string; role: string; photo?: string }[] = [
   { name: "Santiago Silva", role: "Co President", photo: "" },
