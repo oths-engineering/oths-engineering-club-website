@@ -17,7 +17,7 @@ export const site = {
 export const hero = {
   kicker: "Tompkins Engineering Design Club",
   lines: ["Create", "Your", "Vision"],
-  sub: "Empowering OTHS students to create their own designs via workshops, competitions, and other opportunities.",
+  sub: "We empower OTHS students to create their own designs via workshops, competitions, and other opportunities.",
   cta: "Join the club",
 };
 
