@@ -9,7 +9,7 @@ export default function Ticker() {
           <ul key={k} className="flex shrink-0 items-center">
             {ticker.map((t, i) => (
               <li key={t} className="flex items-center gap-8 pr-8">
-                <span className={`font-display text-6xl font-black uppercase tracking-wide ${i % 2 ? "hm-outline-soft" : ""}`}>{t}</span>
+                <span className={`font-display text-4xl font-black uppercase tracking-wide ${i % 2 ? "hm-outline-soft" : ""}`}>{t}</span>
                 <GearIcon n={i % 2 ? 8 : 10} className={`size-12 ${i % 2 ? "hm-b" : "hm-o"}`} spin={6 + i} />
               </li>
             ))}

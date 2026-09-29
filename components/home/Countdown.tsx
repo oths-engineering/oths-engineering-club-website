@@ -24,7 +24,7 @@ export default function Countdown({ to }: { to: string }) {
     <div className="grid max-w-md grid-cols-4 gap-px border hm-bd bg-[color:var(--hm-line-2)]" role="timer" aria-label="Time until next meeting">
       {vals.map((v, i) => (
         <div key={labels[i]} className="hm-panel px-2 py-4 text-center">
-          <div className={`overflow-hidden font-display text-5xl font-black tabular-nums md:text-6xl ${i === 3 ? "hm-o" : ""}`}>
+          <div className={`overflow-hidden font-display text-3xl font-black tabular-nums md:text-4xl ${i === 3 ? "hm-o" : ""}`}>
             <span key={v} className="hm-tick">{v}</span>
           </div>
           <p className="mt-1 font-mono text-[10px] uppercase tracking-[0.25em] hm-mute">{labels[i]}</p>

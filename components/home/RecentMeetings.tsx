@@ -41,7 +41,7 @@ export default function RecentMeetings({ meetings }: { meetings: any[] }) {
                         )}
                       </div>
                       <div className="flex flex-1 flex-col gap-3 p-5">
-                        <h3 className="font-display text-3xl font-extrabold uppercase leading-[0.95]">{m.title}</h3>
+                        <h3 className="font-display text-xl font-extrabold uppercase leading-tight">{m.title}</h3>
                         {m.summary && <p className="line-clamp-3 text-sm text-[color:var(--hm-text)]/65">{m.summary}</p>}
                         <span className="mt-auto pt-3 font-mono text-xs uppercase tracking-[0.2em] hm-o">
                           Open <span className="inline-block transition-transform group-hover:translate-x-1.5">→</span>

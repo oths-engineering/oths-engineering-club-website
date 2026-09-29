@@ -16,7 +16,7 @@ export default function Pillars() {
     <section className="relative py-24 md:py-36">
       <Container>
         <Head n="01" label="What we do" title="Three drives. One machine." />
-        <div className="mt-14 grid gap-6 md:grid-cols-3">
+        <div className="mt-14 grid gap-6 lg:grid-cols-3">
           {groups.map((g, i) => {
             const items = clubSections.filter((s) => s.category === g.key);
             return (
@@ -35,7 +35,7 @@ export default function Pillars() {
                   </div>
 
                   <div className="relative">
-                    <h3 className="font-display text-7xl font-black uppercase leading-[0.85] md:text-[5.5rem]">{g.label}</h3>
+                    <h3 className="font-display text-4xl font-black uppercase leading-[1.05] break-words lg:text-[clamp(1.5rem,2.1vw,2.3rem)]">{g.label}</h3>
                     <p className="mt-4 max-w-xs text-[color:var(--hm-text)]/75">{g.blurb}</p>
                     <ul className="mt-6 space-y-1 font-mono text-xs uppercase tracking-wider">
                       {items.slice(0, 4).map((s) => (

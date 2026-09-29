@@ -18,7 +18,7 @@ export default function Stats() {
             >
               <p className="font-mono text-[11px] uppercase tracking-[0.25em] hm-mute">{s.label}</p>
               <p
-                className={`my-4 font-display text-[clamp(3.5rem,8vw,7.5rem)] font-black leading-none ${i % 2 ? "hm-b" : "hm-o"}`}
+                className={`my-4 font-display text-[clamp(2.25rem,4.4vw,4rem)] font-black leading-none ${i % 2 ? "hm-b" : "hm-o"}`}
                 style={{ textShadow: "0 0 40px currentColor" }}
               >
                 <CountUp to={s.value} suffix={s.suffix} />
