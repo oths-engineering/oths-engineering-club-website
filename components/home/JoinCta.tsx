@@ -19,12 +19,12 @@ export default function JoinCta() {
       <Container className="relative">
         <p data-reveal className="font-mono text-xs uppercase tracking-[0.3em] hm-o">[05] Membership</p>
         <h2 className="mt-6 font-display text-[clamp(4.5rem,16vw,16rem)] font-black uppercase leading-[0.8] tracking-[-0.02em]">
-          <span data-reveal className="block" style={{ "--d": "0.1s" } as React.CSSProperties}>Come build</span>
-          <span data-reveal className="block hm-outline-o" style={{ "--d": "0.25s" } as React.CSSProperties}>with us.</span>
+          <span data-reveal className="block" style={{ "--d": "0.1s" } as React.CSSProperties}>Join the</span>
+          <span data-reveal className="block hm-outline-o" style={{ "--d": "0.25s" } as React.CSSProperties}>CLUB</span>
         </h2>
         <div data-reveal className="mt-14" style={{ "--d": "0.4s" } as React.CSSProperties}>
           <Link href="/join" className="hm-btn hm-btn-solid hm-ping px-10 py-6 text-sm">
-            Apply to join <span>→</span>
+           Join the club  <span>→</span>
           </Link>
         </div>
       </Container>

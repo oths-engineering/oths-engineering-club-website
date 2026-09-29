@@ -1,11 +1,11 @@
 export const site = {
-  name: "Tompkins Engineering & Design Club",
+  name: "Tompkins Engineering Design",
   short: "TEDC",
   description: "Workshops, competitions, and projects for OTHS students who want to create their own designs.",
   url: process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000",
-  email: "you@example.com",
-  location: "Meeting location here",
-  linktree: "https://linktr.ee/yourclub",
+  email: "",
+  location: "Room 2232 at OTHS",
+  linktree: "https://linktr.ee/OTHSEngineering",
   socials: [
     { platform: "Discord", url: "" },
     { platform: "Remind", url: "" },
@@ -15,8 +15,8 @@ export const site = {
 };
 
 export const hero = {
-  kicker: "Tompkins Engineering & Design Club",
-  lines: ["Plan.", "Prototype.", "Perfect."],
+  kicker: "Tompkins Engineering Design Club",
+  lines: ["Design", "Your", "Future"],
   sub: "Empowering OTHS students to create their own designs via workshops, competitions, and other opportunities.",
   cta: "Join the club",
 };
