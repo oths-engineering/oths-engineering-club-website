@@ -24,7 +24,7 @@ export default function Machine() {
     <>
       <section className="relative pt-24 md:pt-36">
         <Container>
-          <Head n="02" label="The process" title="Scroll to turn the crank." />
+          <Head n="02" label="The process" title="Engineering Design Values" />
         </Container>
       </section>
 
