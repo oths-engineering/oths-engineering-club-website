@@ -65,13 +65,6 @@ export default function Hero() {
       </div>
 
       <Container className="relative z-10 flex min-h-[calc(100svh-4rem)] flex-col justify-between py-8">
-        <div className="flex items-center justify-between font-mono text-[11px] uppercase tracking-[0.25em]">
-          <span className="hm-mute">{hero.kicker}</span>
-          <span className="hidden items-center gap-2 sm:flex">
-            <i className="hm-blink inline-block size-2 rounded-full bg-[color:var(--hm-orange-hi)]" />
-            <span className="hm-o">SYS online</span>
-          </span>
-        </div>
 
         <h1
           aria-label={hero.lines.join(" ")}
