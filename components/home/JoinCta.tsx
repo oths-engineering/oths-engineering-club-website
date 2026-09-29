@@ -24,7 +24,7 @@ export default function JoinCta() {
         </h2>
         <div data-reveal className="mt-14" style={{ "--d": "0.4s" } as React.CSSProperties}>
           <Link href="/join" className="hm-btn hm-btn-solid hm-ping px-10 py-6 text-sm">
-           Join the club  <span>→</span>
+           Join  <span>→</span>
           </Link>
         </div>
       </Container>
