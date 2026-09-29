@@ -14,3 +14,6 @@ export const MEETING_QUERY = defineQuery(
 export const MEETING_SLUGS_QUERY = defineQuery(
   `*[_type == "meeting" && defined(slug.current)]{"slug": slug.current, "updated": _updatedAt}`
 );
+export const MEETING_NAV_QUERY = defineQuery(
+  `*[_type == "meeting" && defined(slug.current)] | order(date desc){title, "slug": slug.current, date}`
+);
