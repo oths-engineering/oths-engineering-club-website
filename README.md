@@ -7,5 +7,3 @@ Coded by the webdev team
 ## TODO:
 
 - add team headshots
-- deploy to vercel
-- 
