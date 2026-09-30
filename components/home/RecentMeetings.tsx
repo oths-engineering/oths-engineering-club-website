@@ -7,8 +7,9 @@ import Tilt from "./Tilt";
 import { GearIcon } from "./Gear";
 import { urlFor } from "@/sanity/lib/image";
 import { dateParts } from "@/lib/utils";
+import type { Meeting } from "@/components/meetings/types";
 
-export default function RecentMeetings({ meetings }: { meetings: any[] }) {
+export default function RecentMeetings({ meetings }: { meetings: Meeting[] }) {
   return (
     <section className="relative py-24 md:py-36">
       <Container>

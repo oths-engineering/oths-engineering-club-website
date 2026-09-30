@@ -66,8 +66,8 @@ export function Gear({
       </g>
     );
 
-  const outer: CSSProperties = { color };
-  if (c !== undefined) (outer as any)["--c"] = c;
+  const outer = { color } as CSSProperties & Record<`--${string}`, number | string>;
+  if (c !== undefined) outer["--c"] = c;
 
   return (
     <g transform={`translate(${x} ${y})`} style={outer} className={[glow ? "hm-glow" : "", c !== undefined ? "hm-lit" : ""].join(" ")}>

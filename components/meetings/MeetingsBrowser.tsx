@@ -132,7 +132,10 @@ export default function MeetingsBrowser({ meetings }: { meetings: Meeting[] }) {
   const setParams = useCallback(
     (patch: Record<string, string | null>) => {
       const p = new URLSearchParams(sp.toString());
-      for (const [k, v] of Object.entries(patch)) (v ? p.set(k, v) : p.delete(k));
+      for (const [k, v] of Object.entries(patch)) {
+        if (v) p.set(k, v);
+        else p.delete(k);
+      }
       const s = p.toString();
       router.replace(s ? `${path}?${s}` : path, { scroll: false });
     },

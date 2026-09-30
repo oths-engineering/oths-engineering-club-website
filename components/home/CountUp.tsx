@@ -1,18 +1,27 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useSyncExternalStore } from "react";
+
+function usePrefersReducedMotion() {
+  return useSyncExternalStore(
+    (cb) => {
+      const mq = matchMedia("(prefers-reduced-motion: reduce)");
+      mq.addEventListener("change", cb);
+      return () => mq.removeEventListener("change", cb);
+    },
+    () => matchMedia("(prefers-reduced-motion: reduce)").matches,
+    () => false
+  );
+}
 
 export default function CountUp({ to, suffix = "" }: { to: number; suffix?: string }) {
   const ref = useRef<HTMLSpanElement>(null);
+  const reduced = usePrefersReducedMotion();
   const [v, setV] = useState(0);
 
   useEffect(() => {
     const el = ref.current;
-    if (!el) return;
-    if (matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      setV(to);
-      return;
-    }
+    if (!el || reduced) return;
     const io = new IntersectionObserver(
       ([e]) => {
         if (!e.isIntersecting) return;
@@ -29,11 +38,11 @@ export default function CountUp({ to, suffix = "" }: { to: number; suffix?: stri
     );
     io.observe(el);
     return () => io.disconnect();
-  }, [to]);
+  }, [to, reduced]);
 
   return (
     <span ref={ref}>
-      {String(v).padStart(Math.max(2, String(to).length), "0")}
+      {String(reduced ? to : v).padStart(Math.max(2, String(to).length), "0")}
       {suffix}
     </span>
   );

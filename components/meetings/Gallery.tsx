@@ -1,18 +1,21 @@
 "use client";
 
-import { useCallback, useEffect, useState, type CSSProperties } from "react";
+import { useCallback, useEffect, useState, useSyncExternalStore, type CSSProperties } from "react";
 import { createPortal } from "react-dom";
 import Image from "next/image";
 import { urlFor } from "@/sanity/lib/image";
+import type { MeetingImage } from "./types";
 
 const pad = (n: number) => String(n).padStart(2, "0");
 
-export default function Gallery({ images = [] }: { images?: any[] }) {
+export default function Gallery({ images = [] }: { images?: MeetingImage[] }) {
   const [open, setOpen] = useState<number | null>(null);
-  const [mounted, setMounted] = useState(false);
+  const isClient = useSyncExternalStore(
+    () => () => {},
+    () => true,
+    () => false
+  );
   const n = images.length;
-
-  useEffect(() => setMounted(true), []);
 
   const go = useCallback((d: number) => setOpen((i) => (i === null ? null : (i + d + n) % n)), [n]);
 
@@ -60,7 +63,7 @@ export default function Gallery({ images = [] }: { images?: any[] }) {
         ))}
       </div>
 
-      {mounted &&
+      {isClient &&
         open !== null &&
         createPortal(
           <div

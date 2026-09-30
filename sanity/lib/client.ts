@@ -9,6 +9,6 @@ export const client = createClient({
   stega: false,
 });
 
-export function staticFetch<T = any>(query: string, params: Record<string, unknown> = {}) {
+export function staticFetch<T = unknown>(query: string, params: Record<string, unknown> = {}) {
   return client.fetch<T>(query, params, { next: { revalidate: 3600 } });
 }

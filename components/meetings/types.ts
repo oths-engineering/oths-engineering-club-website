@@ -1,3 +1,7 @@
+import type { SanityImageSource } from "@sanity/image-url";
+
+export type MeetingImage = SanityImageSource & { _key?: string; alt?: string };
+
 export type Meeting = {
   _id: string;
   title: string;
@@ -5,8 +9,8 @@ export type Meeting = {
   date: string;
   summary?: string;
   slidesUrl?: string;
-  thumb?: any;
-  gallery?: any[];
+  thumb?: MeetingImage;
+  gallery?: MeetingImage[];
   upcoming?: boolean;
 };
 

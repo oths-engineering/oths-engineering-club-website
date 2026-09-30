@@ -1,17 +1,18 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useSyncExternalStore } from "react";
 
 const pad = (n: number) => String(n).padStart(2, "0");
 
 export default function Countdown({ to }: { to: string }) {
-  const [now, setNow] = useState<number | null>(null);
-
-  useEffect(() => {
-    setNow(Date.now());
-    const id = setInterval(() => setNow(Date.now()), 1000);
-    return () => clearInterval(id);
-  }, []);
+  const now = useSyncExternalStore(
+    (cb) => {
+      const id = setInterval(cb, 1000);
+      return () => clearInterval(id);
+    },
+    () => Math.floor(Date.now() / 1000) * 1000,
+    () => null
+  );
 
   const diff = now === null ? null : Math.max(0, new Date(to).getTime() - now);
   const vals =

@@ -18,7 +18,7 @@ import type { Meeting, NavItem } from "@/components/meetings/types";
 type Props = { params: Promise<{ slug: string }> };
 
 export async function generateStaticParams() {
-  const slugs: { slug: string }[] = await staticFetch(MEETING_SLUGS_QUERY);
+  const slugs = await staticFetch<{ slug: string }[]>(MEETING_SLUGS_QUERY);
   return slugs.map((s) => ({ slug: s.slug }));
 }
 
@@ -62,6 +62,7 @@ export default async function MeetingPage({ params }: Props) {
   if (!m) notFound();
 
   const p = dateParts(m.date);
+  // eslint-disable-next-line react-hooks/purity -- server component: evaluated once per request/build
   const upcoming = new Date(m.date).getTime() > Date.now();
   const i = (nav ?? []).findIndex((n) => n.slug === slug);
   const newer = i > 0 ? nav[i - 1] : null;
