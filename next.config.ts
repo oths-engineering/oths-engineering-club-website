@@ -5,6 +5,7 @@ const nextConfig: NextConfig = {
     remotePatterns: [{ protocol: "https", hostname: "cdn.sanity.io" }],
   },
   devIndicators: false,
+  allowedDevOrigins: ["*.ngrok-free.app"],
 };
 
 export default nextConfig;
