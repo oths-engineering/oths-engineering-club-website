@@ -1,0 +1,42 @@
+import type { CSSProperties } from "react";
+import Container from "@/components/layout/Container";
+import Logo from "@/components/ui/Logo";
+import { Gear } from "@/components/home/Gear";
+import { join, membership } from "@/content/site";
+
+export default function JoinHero() {
+  return (
+    <section className="relative overflow-hidden">
+      <div className="hm-scan" aria-hidden />
+      <Container className="relative grid items-center gap-10 py-16 md:py-24 lg:grid-cols-[1.3fr_1fr]">
+        <div>
+          <p className="hm-fade font-mono text-[11px] uppercase tracking-[0.3em] hm-o">[00] {join.kicker}</p>
+          <h1 aria-label={join.title.join(" ")} className="mt-6 font-display text-[clamp(2.6rem,8vw,7.5rem)] font-black uppercase leading-[1.05]">
+            <span aria-hidden>
+              {join.title.map((l, i) => (
+                <span key={l} className={`block overflow-hidden pb-[0.08em] ${i === 1 ? "hm-outline" : i === 2 ? "hm-o" : ""}`}>
+                  {[...l].map((c, k) => (
+                    <span key={k} className="hm-char" style={{ "--d": `${i * 0.18 + k * 0.045}s` } as CSSProperties}>
+                      {c}
+                    </span>
+                  ))}
+                </span>
+              ))}
+            </span>
+          </h1>
+          <p className="hm-fade mt-8 max-w-md text-lg text-[color:var(--hm-text)]/80" style={{ animationDelay: "0.8s" }}>
+            {membership[0] || join.lead}
+          </p>
+        </div>
+
+        <div className="hm-spool relative mx-auto hidden aspect-square w-full max-w-[380px] lg:block" aria-hidden>
+          <svg viewBox="-300 -300 600 600" className="absolute inset-0 h-full w-full overflow-visible" fill="none">
+            <Gear n={44} m={10} color="var(--hm-orange-hi)" sw={2} spokes={0} fill={0.04} glow spin={220} />
+            <Gear n={30} m={10} dir={-1} color="var(--hm-blue-hi)" sw={2.5} spokes={0} fill={0.05} glow spin={160} />
+          </svg>
+          <Logo className="absolute left-1/2 top-1/2 h-auto w-[44%] -translate-x-1/2 -translate-y-1/2 drop-shadow-[0_0_30px_rgba(69,133,247,0.5)]" />
+        </div>
+      </Container>
+    </section>
+  );
+}
