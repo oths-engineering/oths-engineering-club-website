@@ -7,10 +7,10 @@ export const site = {
   location: "Room 2232 at OTHS",
   linktree: "https://linktr.ee/OTHSEngineering",
   socials: [
-    { platform: "Discord", url: "" },
-    { platform: "Remind", url: "" },
-    { platform: "X", url: "" },
-    { platform: "Instagram", url: "" },
+    { platform: "Discord", url: "https://discord.gg/k6MxEdnKgB" },
+    { platform: "Remind", url: "https://www.remind.com/join/oths-ed" },
+    { platform: "X", url: "https://x.com/OthsEngnDesign" },
+    { platform: "Instagram", url: "https://www.instagram.com/othsengineeringclub/" },
   ],
 };
 
@@ -46,7 +46,7 @@ export const team: { name: string; role: string; photo?: string }[] = [
   { name: "Elijah Muse-May", role: "Web Development lead", photo: "" },
 ];
 
-export const membership = [""];
+export const membership = ["Join the club that builds the future. No tryouts, no experience needed."];
 
 export const about = {
   kicker: "About the club",
@@ -64,5 +64,16 @@ export const about = {
     { t: "Brief", d: "A short summary/introduction to the topic of the day, that be a workshop or project day." },
     { t: "Build", d: "Either follow along on the hands-on workshop, or get to work on your final project." },
     { t: "Discuss", d: "Process what you have learned or achieved that day, sometimes even with food." },
+  ],
+};
+
+export const join = {
+  kicker: "Membership",
+  title: ["Join", "the", "club."],
+  lead: "No tryouts, no experience needed. Get on the two channels below and you're in.",
+  steps: [
+    { t: "Join Discord", d: "This is where everything happens. Say hi and tell us what you want to build." },
+    { t: "Get Remind", d: "Meeting reminders go straight to your phone, so you never miss a session." },
+    { t: "Show up", d: "Come to the next meeting and bring an idea, or just bring yourself." },
   ],
 };
