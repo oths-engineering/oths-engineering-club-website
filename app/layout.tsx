@@ -3,6 +3,7 @@ import { Orbitron, Montserrat } from "next/font/google";
 import "./globals.css";
 import { site } from "@/content/site";
 import { Analytics } from "@vercel/analytics/next"
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 const orbitron = Orbitron({
   subsets: ["latin"],
@@ -39,6 +40,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <Analytics/>
+      <SpeedInsights/>
       <body className={`${orbitron.variable} ${montserrat.variable} antialiased`}>{children}</body>
     </html>
   );
