@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Orbitron, Montserrat } from "next/font/google";
 import "./globals.css";
 import { site } from "@/content/site";
+import { Analytics } from "@vercel/analytics/next"
 
 const orbitron = Orbitron({
   subsets: ["latin"],
@@ -37,6 +38,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
+      <Analytics/>
       <body className={`${orbitron.variable} ${montserrat.variable} antialiased`}>{children}</body>
     </html>
   );
