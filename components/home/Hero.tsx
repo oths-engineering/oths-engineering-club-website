@@ -85,10 +85,6 @@ export default function Hero() {
               <Link href="/meetings" className="hm-btn hm-btn-blue">Meetings <span>→</span></Link>
             </div>
           </div>
-          <div className="hidden items-end gap-4 font-mono text-[11px] uppercase tracking-[0.25em] md:flex">
-            <span className="hm-mute [writing-mode:vertical-rl]">Scroll</span>
-            <span className="hm-cue" />
-          </div>
         </div>
       </Container>
     </section>
