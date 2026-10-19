@@ -71,7 +71,7 @@ export default function Footer() {
       </div>
 
       <div className="border-t border-white/10 py-4 text-center font-mono text-[11px] uppercase tracking-[0.2em] text-white/50">
-        © {new Date().getFullYear()} {site.name}
+        © {new Date().getFullYear()} Hack Club. Registered under The Hack Foundation, a 501(c)(3) nonprofit (EIN: 81-2908499).
       </div>
     </footer>
   );
