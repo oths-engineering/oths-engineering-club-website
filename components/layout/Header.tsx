@@ -10,7 +10,7 @@ export default function Header() {
         <Link href="/" className="group flex items-center gap-3">
           <Logo className="size-[50px] transition-transform duration-700" />
           <span className="font-display text-sm font-extrabold uppercase tracking-[0.18em] text-white">{site.short}</span>
-          <span className="hidden font-mono text-[10px] uppercase tracking-[0.25em] text-white/40 lg:inline">{site.name}</span>
+          <span className="hidden font-mono text-[10px] uppercase tracking-[0.25em] text-white/40 lg:inline">The OTHS Hack Club Chapter</span>
         </Link>
         <NavLinks />
       </div>
