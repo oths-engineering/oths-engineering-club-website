@@ -24,7 +24,7 @@ export const hero = {
 export const ticker = ["Plan", "Prototype", "Perfect"];
 
 export const stats: { value: number; suffix?: string; label: string }[] = [
-  { value: 40, suffix: "+", label: "Members" },
+  { value: 30, suffix: "+", label: "Members" },
   { value: 20, label: "Workshops planned" },
   { value: 2, label: "Competitions in progress" },
   { value: 0, label: "Hack Club Projects created" },
