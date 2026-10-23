@@ -4,7 +4,11 @@ import { notFound } from "next/navigation";
 import "@/components/home/home.css";
 import { sanityFetch } from "@/sanity/lib/live";
 import { staticFetch } from "@/sanity/lib/client";
-import { MEETING_QUERY, MEETING_SLUGS_QUERY, MEETING_NAV_QUERY } from "@/sanity/lib/queries";
+import {
+  MEETING_QUERY,
+  MEETING_SLUGS_QUERY,
+  MEETING_NAV_QUERY,
+} from "@/sanity/lib/queries";
 import { urlFor } from "@/sanity/lib/image";
 import { dateParts } from "@/lib/utils";
 import Container from "@/components/layout/Container";
@@ -18,34 +22,67 @@ import type { Meeting, NavItem } from "@/components/meetings/types";
 type Props = { params: Promise<{ slug: string }> };
 
 export async function generateStaticParams() {
-  const slugs = await staticFetch<{ slug: string }[]>(MEETING_SLUGS_QUERY);
+  const slugs = await staticFetch<{ slug: string }[]>(
+    MEETING_SLUGS_QUERY,
+  );
+
   return slugs.map((s) => ({ slug: s.slug }));
 }
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: Props): Promise<Metadata> {
   const { slug } = await params;
-  const { data: m } = (await sanityFetch({ query: MEETING_QUERY, params: { slug } })) as unknown as { data: Meeting | null };
+
+  const { data: m } = (await sanityFetch({
+    query: MEETING_QUERY,
+    params: { slug },
+  })) as unknown as { data: Meeting | null };
+
   if (!m) return {};
-  const image = m.thumb ? urlFor(m.thumb).width(1200).height(630).url() : undefined;
+
+  const image = m.thumb
+    ? urlFor(m.thumb).width(1200).height(630).url()
+    : undefined;
+
   return {
     title: m.title,
     description: m.summary,
-    openGraph: { title: m.title, description: m.summary, type: "article", images: image ? [{ url: image, width: 1200, height: 630 }] : undefined },
+    openGraph: {
+      title: m.title,
+      description: m.summary,
+      type: "article",
+      images: image
+        ? [{ url: image, width: 1200, height: 630 }]
+        : undefined,
+    },
   };
 }
 
-function Step({ item, dir }: { item: NavItem | null; dir: "older" | "newer" }) {
+function Step({
+  item,
+  dir,
+}: {
+  item: NavItem | null;
+  dir: "older" | "newer";
+}) {
   if (!item) return <div />;
+
   const p = dateParts(item.date);
+
   return (
     <Link
       href={`/meetings/${item.slug}`}
-      className={`group border bg-[color:var(--hm-panel)] p-6 transition-shadow hm-bd hover:shadow-[0_0_0_1px_var(--hm-orange-hi)] ${dir === "newer" ? "md:text-right" : ""}`}
+      className={`group border bg-[color:var(--hm-panel)] p-6 transition-shadow hm-bd hover:shadow-[0_0_0_1px_var(--hm-orange-hi)] ${
+        dir === "newer" ? "md:text-right" : ""
+      }`}
     >
       <p className="font-mono text-[11px] uppercase tracking-[0.25em] hm-o">
         {dir === "older" ? "← Older" : "Newer →"}
       </p>
-      <h3 className="mt-3 font-display text-xl font-black uppercase leading-tight">{item.title}</h3>
+      <h3 className="mt-3 font-display text-xl font-black uppercase leading-tight">
+        {item.title}
+      </h3>
       <p className="mt-2 font-mono text-xs uppercase tracking-widest hm-mute">
         {p.month} {p.day} · {p.year}
       </p>
@@ -55,15 +92,22 @@ function Step({ item, dir }: { item: NavItem | null; dir: "older" | "newer" }) {
 
 export default async function MeetingPage({ params }: Props) {
   const { slug } = await params;
+
   const [{ data: m }, { data: nav }] = (await Promise.all([
     sanityFetch({ query: MEETING_QUERY, params: { slug } }),
     sanityFetch({ query: MEETING_NAV_QUERY }),
-  ])) as unknown as [{ data: Meeting | null }, { data: NavItem[] }];
+  ])) as unknown as [
+    { data: Meeting | null },
+    { data: NavItem[] },
+  ];
+
   if (!m) notFound();
 
   const p = dateParts(m.date);
-  // eslint-disable-next-line react-hooks/purity -- server component: evaluated once per request/build
+
+  // eslint-disable-next-line react-hooks/purity
   const upcoming = new Date(m.date).getTime() > Date.now();
+
   const i = (nav ?? []).findIndex((n) => n.slug === slug);
   const newer = i > 0 ? nav[i - 1] : null;
   const older = i >= 0 && i < nav.length - 1 ? nav[i + 1] : null;
@@ -73,47 +117,94 @@ export default async function MeetingPage({ params }: Props) {
     <div id="hm" className="hm">
       <Engine />
       <Backdrop />
+
       <div className="relative z-10">
         <section className="relative overflow-hidden">
           <div className="hm-scan" aria-hidden />
+
           <Container className="relative py-12 md:py-20">
-            <Link href="/meetings" className="font-mono text-xs uppercase tracking-[0.25em] text-[color:var(--hm-mute)] transition-colors hover:text-[color:var(--hm-text)]">
+            <Link
+              href="/meetings"
+              className="font-mono text-xs uppercase tracking-[0.25em] text-[color:var(--hm-mute)] transition-colors hover:text-[color:var(--hm-text)]"
+            >
               ← Archive
             </Link>
 
-            <div className="mt-10 grid gap-10 lg:grid-cols-[auto_1fr] lg:gap-16">
-              <div className="hm-fade flex items-end gap-4 font-display font-black uppercase leading-none">
-                <span className="hm-outline-o text-[clamp(6rem,14vw,11rem)]">{p.day}</span>
-                <span className="pb-3 text-3xl md:text-4xl">
-                  {p.month}
-                  <br />
-                  <span className="font-mono text-sm font-normal tracking-widest hm-mute">{p.year}</span>
-                  <br />
-                  <span className="font-mono text-sm font-normal tracking-widest hm-o">{p.time}</span>
-                </span>
-              </div>
+            <div className="mt-10 grid items-end gap-10 lg:grid-cols-[auto_minmax(0,1fr)] lg:gap-x-16">
+              <div className="flex min-w-0 flex-col items-start gap-6 lg:justify-self-end">
+                <div className="flex flex-wrap items-center gap-2">
+                  {m.type && (
+                    <span className="inline-flex items-center gap-2 border px-3 py-1.5 font-mono text-[10px] font-bold uppercase tracking-[0.15em] hm-bd">
+                      <i className="size-1.5 shrink-0 rounded-full bg-[color:var(--hm-orange-hi)]" />
+                      <span className="hm-o">{m.type}</span>
+                    </span>
+                  )}
 
-              <div className="space-y-8">
-                <div>
-                  <p className="inline-flex items-center gap-2 border px-3 py-1.5 font-mono text-[11px] uppercase tracking-[0.25em] hm-bd">
-                    <i className={`size-1.5 rounded-full bg-[color:var(--hm-orange-hi)] ${upcoming ? "hm-blink" : ""}`} />
-                    <span className="hm-o">{upcoming ? "Upcoming" : "Completed"}</span>
-                  </p>
-                  <h1 className="mt-5 font-display text-[clamp(2rem,5.4vw,4.75rem)] font-black uppercase leading-[1.08]">{m.title}</h1>
+                  {m.branch && (
+                    <span className="inline-flex items-center gap-2 border border-dashed px-3 py-1.5 font-mono text-[10px] uppercase tracking-[0.12em] hm-bd">
+                      <span className="hm-mute">BRANCH</span>
+                      <span className="text-[color:var(--hm-text)]">
+                        {m.branch}
+                      </span>
+                    </span>
+                  )}
                 </div>
 
+                <div className="hm-fade flex items-end gap-4 font-display font-black uppercase leading-none">
+                  <span className="hm-outline-o text-[clamp(6rem,12vw,9rem)]">
+                    {p.day}
+                  </span>
+                  <span className="text-3xl md:text-4xl">
+                    {p.month}
+                    <br />
+                    <span className="font-mono text-sm font-normal tracking-widest hm-mute">
+                      {p.year}
+                    </span>
+                    <br />
+                    <span className="font-mono text-sm font-normal tracking-widest hm-o">
+                      {p.time}
+                    </span>
+                  </span>
+                </div>
+
+                {upcoming && <Countdown to={m.date} />}
+              </div>
+
+              <div className="flex min-w-0 flex-col items-start gap-6">
+                <div className="flex flex-wrap items-center gap-2">
+                  <span className="inline-flex items-center gap-2 border px-3 py-1.5 font-mono text-[11px] uppercase tracking-[0.25em] hm-bd">
+                    <i
+                      className={`size-1.5 rounded-full bg-[color:var(--hm-orange-hi)] ${
+                        upcoming ? "hm-blink" : ""
+                      }`}
+                    />
+                    <span className="hm-o">
+                      {upcoming ? "Upcoming" : "Completed"}
+                    </span>
+                  </span>
+                </div>
+
+                <h1 className="font-display text-[clamp(2.5rem,6vw,5rem)] font-black uppercase leading-[1.05]">
+                  {m.title}
+                </h1>
+
                 {m.summary && (
-                  <div className="relative border bg-[color:var(--hm-panel)] p-6 hm-bd md:p-8">
+                  <div className="relative w-full border bg-[color:var(--hm-panel)] px-8 py-8 hm-bd">
                     <i className="hm-corner tl" />
                     <i className="hm-corner br" />
-                    <p className="whitespace-pre-line text-lg text-[color:var(--hm-text)]/80">{m.summary}</p>
+                    <p className="whitespace-pre-line text-base text-[color:var(--hm-text)]/80">
+                      {m.summary}
+                    </p>
                   </div>
                 )}
 
-                {upcoming && <Countdown to={m.date} />}
-
                 {m.slidesUrl && (
-                  <a href={m.slidesUrl} target="_blank" rel="noopener noreferrer" className="hm-btn hm-btn-solid">
+                  <a
+                    href={m.slidesUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hm-btn hm-btn-solid"
+                  >
                     View slides <span>↗</span>
                   </a>
                 )}
@@ -124,7 +215,16 @@ export default async function MeetingPage({ params }: Props) {
 
         <section className="relative py-16 md:py-28">
           <Container>
-            <AboutHead n="01" label="Gallery" title={frames ? `${frames} ${frames === 1 ? "frame" : "frames"} captured.` : "No photos yet."} />
+            <AboutHead
+              n="01"
+              label="Gallery"
+              title={
+                frames
+                  ? `${frames} ${frames === 1 ? "frame" : "frames"} captured.`
+                  : "No photos yet."
+              }
+            />
+
             {frames > 0 && (
               <div className="mt-12">
                 <Gallery images={m.gallery!} />
@@ -143,7 +243,6 @@ export default async function MeetingPage({ params }: Props) {
             </Container>
           </section>
         )}
-
       </div>
     </div>
   );

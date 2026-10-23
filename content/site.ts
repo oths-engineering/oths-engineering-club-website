@@ -17,17 +17,17 @@ export const site = {
 export const hero = {
   kicker: "Tompkins Engineering Design Club",
   lines: ["Create", "Your", "Vision"],
-  sub: "We empower OTHS students to create their own designs via workshops, competitions, and other opportunities.",
+  sub: "We are a Hack Club that  empowers OTHS students to create their own designs via workshops, competitions, and other opportunities.",
   cta: "Join the club",
 };
 
 export const ticker = ["Plan", "Prototype", "Perfect"];
 
 export const stats: { value: number; suffix?: string; label: string }[] = [
-  { value: 40, suffix: "+", label: "Members" },
+  { value: 30, suffix: "+", label: "Members" },
   { value: 20, label: "Workshops planned" },
-  { value: 2, label: "Competitions" },
-  { value: 0, label: "Projects shipped" },
+  { value: 2, label: "Competitions in progress" },
+  { value: 0, label: "Hack Club Projects created" },
 ];
 
 export const stages = [
@@ -46,12 +46,12 @@ export const team: { name: string; role: string; photo?: string }[] = [
   { name: "Elijah Muse-May", role: "Web Development lead", photo: "" },
 ];
 
-export const membership = ["Join the club that builds the future. No tryouts, no experience needed."];
+export const membership = ["Join the Hack Club that builds the future at OTHS. No fee, no experience needed."];
 
 export const about = {
   kicker: "About the club",
   title: ["We build", "what we", "envision."],
-  lead: "Tompkins Engineering Design is a student-run club at OTHS where anyone can turn an idea into something real.",
+  lead: "Tompkins Engineering Design is a Hack Club chapter at Obra D. Tompkins High School where anyone can turn an idea into something real.",
   manifesto:
     "We believe engineering is learned with your hands. Our main goal is to give students the tools, mentorship, and empowerment to bring their ideas to life.",
   tracks: [

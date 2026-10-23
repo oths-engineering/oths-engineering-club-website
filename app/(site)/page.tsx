@@ -18,6 +18,8 @@ type MeetingListItem = {
   title: string;
   slug: string;
   date: string;
+  type: "General Meeting" | "Workshop" | "Competition" | "Project Workday";
+  branch?: "Mechanical Engineering | Electrical Engineering | Software Engineering | Other";
   location?: string;
   summary?: string;
   thumb?: { asset?: { _ref?: string }; alt?: string };

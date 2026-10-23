@@ -10,7 +10,7 @@ export default function Manifesto() {
       <div className="sticky top-16 flex h-[calc(100svh-4rem)] items-center">
         <Container>
           <p className="font-mono text-xs uppercase tracking-[0.3em]">
-            <span className="hm-o">[01]</span> <span className="hm-mute">Manifesto</span>
+            <span className="hm-o">[01]</span> <span className="hm-mute">Mission Statement</span>
           </p>
           <p className="mt-6 max-w-6xl font-display text-[clamp(1.4rem,3.3vw,3.1rem)] font-bold uppercase leading-[1.3]">
             {words.map((w, i) => (
