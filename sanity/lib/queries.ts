@@ -1,6 +1,6 @@
 import { defineQuery } from "next-sanity";
 
-const MEETING_FIELDS = `_id, title, "slug": slug.current, date, summary, slidesUrl, "thumb": gallery[0]`;
+const MEETING_FIELDS = `_id, title, "slug": slug.current, date, type, branch, summary, slidesUrl, "thumb": gallery[0]`;
 
 export const UPCOMING_MEETINGS_QUERY = defineQuery(
   `*[_type == "meeting" && date >= now()] | order(date asc){${MEETING_FIELDS}}`

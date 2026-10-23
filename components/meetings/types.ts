@@ -5,8 +5,10 @@ export type MeetingImage = SanityImageSource & { _key?: string; alt?: string };
 export type Meeting = {
   _id: string;
   title: string;
-  slug: string;
+  slug: string; 
   date: string;
+  type: "General Meeting" | "Workshop" | "Competition" | "Project Workday";
+  branch?: "Mechanical Engineering | Electrical Engineering | Software Engineering | Other";
   summary?: string;
   slidesUrl?: string;
   thumb?: MeetingImage;

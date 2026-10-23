@@ -110,6 +110,9 @@ function Tile({ m, i, words }: { m: Meeting; i: number; words: string[] }) {
             <span className="mt-auto pt-3 font-mono text-xs uppercase tracking-[0.2em] hm-o">
               Open <span className="inline-block transition-transform group-hover:translate-x-1.5">→</span>
             </span>
+            <div className="absolute right-0 top-0 transition-transform group-hover:translate-y-0">
+              <h3 className="bg-[color:var(--hm-bg)] px-3 py-1.5 font-mono text-[11px] uppercase tracking-widest">Type : {m.type}</h3>
+            </div>
           </div>
         </Link>
       </Tilt>
