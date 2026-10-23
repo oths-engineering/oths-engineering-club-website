@@ -5,17 +5,7 @@ import Head from "./Head";
 import { GearIcon } from "./Gear";
 import { urlFor } from "@/sanity/lib/image";
 import { dateParts } from "@/lib/utils";
-
-type Meeting = {
-  _id: string;
-  title: string;
-  slug: string;
-  date: string;
-  location?: string;
-  summary?: string;
-  coverImage?: { asset?: { _ref?: string }; alt?: string };
-  slidesUrl?: string;
-};
+import type { Meeting } from "@/components/meetings/types";
 
 export default function NextMeeting({ meeting }: { meeting: Meeting | null | undefined }) {
   if (!meeting) {
@@ -35,9 +25,7 @@ export default function NextMeeting({ meeting }: { meeting: Meeting | null | und
   }
 
   const p = dateParts(meeting.date);
-  const src = meeting.coverImage?.asset?._ref
-    ? urlFor(meeting.coverImage.asset._ref).width(1200).height(675).url()
-    : null;
+  const src = meeting.thumb ? urlFor(meeting.thumb).width(1200).height(675).url() : null;
 
   return (
     <section className="relative py-24 md:py-36">
@@ -52,7 +40,7 @@ export default function NextMeeting({ meeting }: { meeting: Meeting | null | und
               // eslint-disable-next-line @next/next/no-img-element
               <img
                 src={src}
-                alt={meeting.coverImage?.alt ?? meeting.title}
+                alt={meeting.thumb?.alt ?? meeting.title}
                 className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
               />
             ) : (
@@ -73,9 +61,9 @@ export default function NextMeeting({ meeting }: { meeting: Meeting | null | und
                 {meeting.summary}
               </p>
             )}
-            {meeting.location && (
+            {meeting.branch && (
               <p className="font-mono text-xs uppercase tracking-[0.2em] hm-mute">
-                {meeting.location}
+                {meeting.branch}
               </p>
             )}
             <span
