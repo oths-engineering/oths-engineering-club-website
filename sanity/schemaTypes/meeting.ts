@@ -13,6 +13,8 @@ export const meeting = defineType({
       validation: (r) => r.required(),
     }),
     defineField({ name: "date", type: "datetime", validation: (r) => r.required() }),
+    defineField({ name: "type", type: "string", options: {list: ["General Meeting", "Workshop", "Competition", "Project Workday"], validation: (r) => r.required() } }),
+    defineField({ name: "Branch", type: "string", options: {list: ["Mechanical Engineering", "Electrical Engineering", "Software Engineering", "Other"]}}),
     defineField({ name: "summary", type: "text", rows: 4 }),
     defineField({
       name: "slidesUrl",
