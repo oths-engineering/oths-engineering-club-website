@@ -1,6 +1,6 @@
 import type { CSSProperties } from "react";
 import Container from "@/components/layout/Container";
-import Logo from "@/components/ui/Logo";
+import Image from "next/image";
 import { Gear } from "@/components/home/Gear";
 import { join, membership } from "@/content/site";
 
@@ -34,7 +34,7 @@ export default function JoinHero() {
             <Gear n={44} m={10} color="var(--hm-orange-hi)" sw={2} spokes={0} fill={0.04} glow spin={220} />
             <Gear n={30} m={10} dir={-1} color="var(--hm-blue-hi)" sw={2.5} spokes={0} fill={0.05} glow spin={160} />
           </svg>
-          <Logo className="absolute left-1/2 top-1/2 h-auto w-[44%] -translate-x-1/2 -translate-y-1/2 drop-shadow-[0_0_30px_rgba(69,133,247,0.5)]" />
+          <Image src="/icons/outline.svg" alt="" width={100} height={100} className="absolute left-1/2 top-1/2 h-auto w-[44%] -translate-x-1/2 -translate-y-1/2 drop-shadow-[0_0_30px_rgba(69,133,247,0.5)]" />
         </div>
       </Container>
     </section>
