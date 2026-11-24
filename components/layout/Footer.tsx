@@ -5,6 +5,7 @@ const nav = [
   { href: "/about", label: "About" },
   { href: "/meetings", label: "Meetings" },
   { href: "/join", label: "Join" },
+  { href: "/studio", label: "Admin Portal" },
 ];
 
 const label = "font-mono text-[11px] uppercase tracking-[0.25em] text-[#ff7f57]";

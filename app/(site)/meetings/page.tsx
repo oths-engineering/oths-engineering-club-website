@@ -14,6 +14,8 @@ export const metadata: Metadata = {
   description: "Upcoming meetings and the archive of everything we've built.",
 };
 
+export const dynamic = "force-dynamic";
+
 export default async function MeetingsPage() {
   const [{ data: upcoming }, { data: past }] = await Promise.all([
     sanityFetch({ query: UPCOMING_MEETINGS_QUERY }) as unknown as Promise<{ data: Meeting[] }>,
